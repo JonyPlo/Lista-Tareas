@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Subtitulo from "./components/Subtitulo";
+import Titulo from "./components/Ttulo";
+import FormTareas from "./components/FormTareas";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className='vh-100 text-light'>
+        <Titulo titulo="Lista de tareas" />
+        <Subtitulo comision="16i" />
+        <FormTareas/>
+      </div>
+    </>
   );
 }
 
