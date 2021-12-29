@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ListaTareas from "./ListaTareas";
 
 const FormTareas = () => {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const [tareaIndividual, setTareaIndividual] = useState("");
-  const [tarea, setTarea] = useState([]);
+  const [tarea, setTarea] = useState(tasks);
 
+  // useEffect
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tarea));
+  }, [tarea]);
+
+  // Aqui van las funciones
   const saveTask = (e) => {
     e.preventDefault();
 
-    let arrayTarea = tarea;
-    arrayTarea.push(tareaIndividual);
-    setTarea(arrayTarea);
+    setTarea([...tarea, tareaIndividual]);
     setTareaIndividual("");
+  };
+
+  const handleDelete = (nombreTarea) => {
+    let arrayTarea = tarea.filter((item) => {
+      return item !== nombreTarea;
+    });
+    console.log(arrayTarea);
+    setTarea(arrayTarea);
   };
 
   return (
@@ -32,7 +45,7 @@ const FormTareas = () => {
       </form>
 
       <section>
-        <ListaTareas tarea={tarea}/>
+        <ListaTareas tarea={tarea} handleDelete={handleDelete} />
       </section>
     </div>
   );
